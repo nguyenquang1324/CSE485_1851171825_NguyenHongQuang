@@ -186,7 +186,7 @@
                     <option value="kém">Kém</option>
                     <option value="trung bình">Trung bình</option>
                     <option value="khá">Khá</option>
-                    <option value="giỏi">Giởi</option>
+                    <option value="giỏi">Giỏi</option>
                 </select>
             </div>
         </div>
@@ -576,13 +576,13 @@
         <div class="col-md-6">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Điện thoại thí sinh</span>
-                <input type="number" name="SDTthisinh" placeholder="Nhập số điện thoại" class="form-control">
+                <input type="number" name="SDTThiSinh" placeholder="Nhập số điện thoại" class="form-control">
             </div>
         </div>
         <div class="col-md-6">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Điện thoại phụ huynh</span>
-                <input type="number" name="SDTphuhuynh" placeholder="Nhập số điện thoại" class="form-control">
+                <input type="number" name="SDTPhuHuynh" placeholder="Nhập số điện thoại" class="form-control">
             </div>
         </div>
     </div>
@@ -630,6 +630,8 @@
         </div>
     </form>
 </div>
-
+<?php
+require_once "model/validate.php";
+?>
 </body>
 </html>
