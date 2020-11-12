@@ -1,3 +1,6 @@
+<?php
+require_once "configs/conect_profile.php";
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +15,18 @@
 
 </head>
 <body>
-<div class="input-group-prepend">
+
+<header class="header">
+    <center>
+    <div class="container">
+        <div class="header__logo">
+            <h1><a href="#"><img src="images/logo.jpg" width="547" height="82"></a></h1>
+        </div>
+    </div>
+    <center
+</header>
+
+<div style="margin-top: 30px;" class="input-group-prepend">
 <!--NAV-BAR-->
 <div class="col-md-2" style="margin-top: 4%;">
     <div style="margin-bottom: 10px;">
@@ -41,7 +55,7 @@
 <!--FORM-->
 
 <div class="col-md-8">
-    <form method="post" name="form_xet_tuyen" >
+    <form method="post" name="form_xet_tuyen" enctype="multipart/form-data">
         <div class="input-group-prepend">
         <div class="col-md-12">
             <h1 style="text-align:center">Thông tin hồ sơ</h1>
@@ -591,6 +605,15 @@
             </div>
         </div>
     </div>
+            <div class="input-group-prepend" style="margin-bottom: 10px;">
+                <div class="col-md-12">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" >Ảnh hồ sơ</span>
+                    <input type="file" name="image" class="form-control">
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div class="slect-hinh-thuc ">
             <div class="input-group-prepend" style="margin:10px 0px 20px 0px; ">
@@ -604,21 +627,21 @@
             <div class="input-group-prepend" style="margin-bottom: 20px">
             <div class="col-md-12">
                 <div class="input-group-prepend">
-                    <input type="checkbox" name="admission" value="class12"> Tuyển bằng tổng điểm trung bình lớp 12 theo tổ hợp 3 môn
+                    <input type="radio" name="admission" value="class12"> Tuyển bằng tổng điểm trung bình lớp 12 theo tổ hợp 3 môn
                 </div>
             </div>
         </div>
             <div class="input-group-prepend" style="margin-bottom: 20px">
             <div class="col-md-12">
                 <div class="input-group-prepend">
-                    <input type="checkbox" name="admission" value="3semester"> Tuyển bằng tổng điểm trung bình 3 học kỳ(HK1,HK2 năm lớp 11 và HK1 năm lớp 12)
+                    <input type="radio" name="admission" value="3semester"> Tuyển bằng tổng điểm trung bình 3 học kỳ(HK1,HK2 năm lớp 11 và HK1 năm lớp 12)
                 </div>
             </div>
         </div>
             <div class="input-group-prepend" style="margin-bottom: 20px">
             <div class="col-md-12">
                 <div class="input-group-prepend">
-                    <input type="checkbox" name="admission" value="bothmethods">
+                    <input type="radio" name="admission" value="bothmethods">
                     Cả 2 hình thức trên
                 </div>
             </div>
@@ -640,6 +663,6 @@
     require_once "model/validate.php";
     ?>
 </div>
-
+</div>
 </body>
 </html>

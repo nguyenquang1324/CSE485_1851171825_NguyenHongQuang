@@ -34,9 +34,48 @@ if (isset($_POST['submit_profile']))
     $SDTPhuHuynh=$_POST['SDTPhuHuynh'];
     $method=$_POST['admission'];
 
-//    isinsert($fullname,$gender,$birthday,$nation,$religion,$placeofbirth,$graduationyear,$academicpower,$conduct,$CMT,$dayranger,$issuedby,$household,$MaTinh10,$city10,$MaTruong10,$MaTinh10,$MaTinh11,$city11,$MaTruong11,$MaTinh11,$MaTinh12,$city12,$MaTruong12,$MaTinh12,$object,$area,$address,$SDTThiSinh,$SDTPhuHuynh,$method);
+
+
+    $avatar_arr = $_FILES['image'];
+    if ($avatar_arr['error'] != 0) {
+        $error = 'Không thể upload file vì lỗi gì đó';
+    } else {
+        $extension = pathinfo($avatar_arr['name'], PATHINFO_EXTENSION);
+        $size = $avatar_arr['size'] / 1024 / 1024; //Mb
+        $arr_extension = ['png', 'jpg', 'jpeg', 'gif'];
+        if (in_array($extension, $arr_extension) == FALSE) {
+            $error = "Cần upload file dạng ảnh";
+        } else if ($size > 0.01) {
+            $error = "Chỉ có thể upload file dung lượng  <= 2Mb";
+        } else {
+            $dir_uploads = __DIR__ . "/uploads";
+            if (file_exists($dir_uploads) == FALSE) {
+                mkdir($dir_uploads);
+            }
+            $file_name = time() . $avatar_arr['name'];
+            $tmp_name = $avatar_arr['tmp_name'];
+            $destination = $dir_uploads . '/' . $file_name;
+            $is_upload = move_uploaded_file($tmp_name, $destination);
+            if ($is_upload) {
+                $result = "Upload file thành công";
+            } else {
+                $error = "Không thể upload file vì lí do gì đó";
+            }
+        }
+    }
 
 
 
+//    if($fullname=='')
+//    {
+//
+//    }
+
+//    echo $file_name;
+
+    isinsert($fullname,$gender,$birthday,$nation,$religion,$placeofbirth,$graduationyear,$academicpower,$conduct,$CMT,$dayranger,$issuedby,$household,$MaTinh10,$city10,$MaTruong10,$MaTinh10,$MaTinh11,$city11,$MaTruong11,$MaTinh11,$MaTinh12,$city12,$MaTruong12,$MaTinh12,$object,$area,$address,$SDTThiSinh,$SDTPhuHuynh,$method,$file_name);
+
+
+//    echo "$fullname,$gender,$birthday,$nation,$religion,$placeofbirth,$graduationyear,$academicpower,$conduct,$CMT,$dayranger,$issuedby,$household,$MaTinh10,$city10,$MaTruong10,$MaTinh10,$MaTinh11,$city11,$MaTruong11,$MaTinh11,$MaTinh12,$city12,$MaTruong12,$MaTinh12,$object,$area,$address,$SDTThiSinh,$SDTPhuHuynh,$method";
 }
 

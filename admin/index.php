@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once "configs/conect_profile.php";
+if(!isset($_SESSION['success']))
+{
+    header("location: views/login.php");
+    exit();
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,29 +21,29 @@ require_once "configs/conect_profile.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 <body>
+<header class="header">
+    <center>
+        <div class="container">
+            <div class="header__logo">
+                <h1><a href="#"><img src="images/logo.jpg" width="547" height="82"></a></h1>
+            </div>
+        </div>
+        <center
+</header>
 <main class="container">
 
     <center><div class="row">
-            <div class="select">
-                <form method="post">
-                    MãGV: <input type="text" name="selectmagv">
-                    TênGV: <input type="text" name="selecttengv">
-                    Môn dạy: <input type="text" name="selectmonday">
-                    <input type="submit" name="timkiem" value="TÌM">
-                </form>
-            </div>
+
             <div>
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Họ tên </th>
-                        <th scope="col">Giới tính</th>
-                        <th scope="col">Ngày sinh</th>
                         <th scope="col">Năm tốt nghiệp</th>
                         <th scope="col">Học lực</th>
                         <th scope="col">Hạnh kiểm</th>
                         <th scope="col">CMT/CCCD</th>
-                        <th scope="col">Hộ khẩu </th>
+                        <th scope="col">Hồ sơ</th>
                         <th scope="col">Hình thức xét</th>
                         <th scope="col">Chi tiết </th>
                     </tr>
@@ -50,21 +56,17 @@ require_once "configs/conect_profile.php";
                         <tr>
                            </td>
                             <td scope="row"> <?php echo $user['0'];?> </td>
-                            <td> <?php echo $user['1'];?> </td>
-                            <td> <?php echo $user['2'];?> </td>
-                            <td> <?php echo $user['3'];?> </td>
                             <td> <?php echo $user['7'];?> </td>
                             <td> <?php echo $user['8'];?> </td>
                             <td> <?php echo $user['9'];?> </td>
                             <td> <?php echo $user['0'];?> </td>
-                            <td> <?php echo $user['12'];?> </td>
+                            <td> <img src="../Xét%20tuyển/model/uploads/<?php echo $user['31']?>"></td>
                             <td> <?php echo $user['30'];?> </td>
-                            <td> <a href="edit.php?id=<?php echo $user['0']?>"><i class="fas fa-edit"></i></a> </td>
+                            <td> <a href="views/chitiet.php?id=<?php echo $user['0']?>"><i class="fas fa-edit"></i></a> </td>
                         </tr>
                     <?php }endforeach; ?>
                     </tbody>
                 </table>
-                <button><a href="create.php">Thêm mới</a></button>
 
             </div>
         </div></center>
