@@ -22,6 +22,7 @@ function selectall()
     $users=mysqli_fetch_all($result);
     return $users;
 }
+
 function selectforid($id)
 {
     $connect=connection();

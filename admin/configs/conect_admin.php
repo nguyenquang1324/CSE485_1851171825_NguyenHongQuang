@@ -20,13 +20,8 @@ function sosanh($username,$password)
     $connection = connection();
     $sql_select = "SELECT * FROM admin";
     $results = mysqli_query($connection, $sql_select);
-//kiểm tra xem có bản ghi nào trả về từ câu truy vấn select hay ko
     if (mysqli_num_rows($results) > 0) {
-        //lấy ra được dữ liệu mong muốn,
-//    cần chú ý phải truyền hằng MYSQLI_ASSOS để có thể trả về 1 mảng
-//    kết hợp
         $users = mysqli_fetch_all($results, MYSQLI_ASSOC);
-        //lặp và hiển thị ra các thông tin
         foreach ($users as $user) {
             if ($username==$user['username'] && $password==$user['pass'])
             {$kiemtra=true;
@@ -37,5 +32,21 @@ function sosanh($username,$password)
     return $kiemtra;
 }
 
-
+function isinsert($fullname,$username,$password,$email,$SDT)
+{
+    $connect=connection();
+    $sql_insert="INSERT INTO `admin` (`fullname`,`username`,`pass`,`email`,`SDT`)
+                                        VALUE 
+                                       ('$fullname','$username','$password','$email','$SDT')";
+    $result=mysqli_query($connect,$sql_insert);
+    if ($result)
+    {
+        $_SESSION['success']="Insert thành công";
+    }
+    else
+    {
+        echo " $sql_insert </br>" ;
+        echo "Insert thất bại";
+    }
+}
 ?>

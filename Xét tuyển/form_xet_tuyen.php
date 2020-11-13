@@ -20,7 +20,7 @@ require_once "configs/conect_profile.php";
     <center>
     <div class="container">
         <div class="header__logo">
-            <h1><a href="#"><img src="images/logo.jpg" width="547" height="82"></a></h1>
+            <h1><a href="../Trang%20chủ%20TLU/index.html"><img src="images/logo.jpg" width="547" height="82"></a></h1>
         </div>
     </div>
     <center

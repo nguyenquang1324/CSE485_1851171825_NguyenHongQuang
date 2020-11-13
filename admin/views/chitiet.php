@@ -1,7 +1,14 @@
 <?php
+session_start();
+require_once "../configs/conect_profile.php";
+if (!isset($_SESSION['success'])) {
+    header("location: login.php");
+    exit();
+}
 $id=$_GET['id'];
-require_once "configs/conect_profile.php";
-$user=selectforid()
+require_once "../configs/conect_profile.php";
+$user=selectforid($id);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,7 +29,7 @@ $user=selectforid()
     <center>
         <div class="container">
             <div class="header__logo">
-                <h1><a href="#"><img src="images/logo.jpg" width="547" height="82"></a></h1>
+                <h1><a href="../../Trang%20chủ%20TLU/index.html"><img src="../images/logo.jpg" width="547" height="82"></a></h1>
             </div>
         </div>
         <center
@@ -67,16 +74,14 @@ $user=selectforid()
                     <div class="col-md-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Họ và tên</span>
-                            <input type="text" name="fullname" placeholder="Nhập tên" class="form-control" value=" ">
+                            <input type="text" name="fullname" placeholder="Nhập tên" class="form-control" value="<?php echo $user['fullname']; ?>" disabled="disable">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Giới tính</span>
                             <select name="gender" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="nam">Nam</option>
-                                <option value="nữ">Nữ</option>
+                                <option value="0"><?php echo $user['gender']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -85,19 +90,19 @@ $user=selectforid()
                     <div class="col-md-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Ngày sinh</span>
-                            <input type="date" name="birthday" placeholder="Nhập ngày tháng năm sinh" class="form-control">
+                            <input type="date" name="birthday" placeholder="Nhập ngày tháng năm sinh"  class="form-control" value="<?php echo $user['birthday']; ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Dân tộc</span>
-                            <input type="text" name="nation" placeholder="Nhập tên" class="form-control">
+                            <input type="text" name="nation" placeholder="Nhập tên" class="form-control" value="<?php echo $user['nation']; ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Tôn giáo</span>
-                            <input type="text" name="religion" placeholder="Nhập tên" class="form-control">
+                            <input type="text" name="religion" placeholder="Nhập tên" class="form-control" value="<?php echo $user['religion']; ?>">
                         </div>
                     </div>
                 </div>
@@ -106,69 +111,7 @@ $user=selectforid()
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Nơi sinh</span>
                             <select name="placeofbirth" class="form-control">
-                                <option value="0">-Chọn tỉnh-</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                <option value="Cần Thơ">Cần Thơ</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Hải Phòng">Hải Phòng</option>
-                                <option value="An Giang">An Giang</option>
-                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                                <option value="Bắc Giang">Bắc Giang</option>
-                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                <option value="Bạc Liêu">Bạc Liêu</option>
-                                <option value="Bắc Ninh">Bắc Ninh</option>
-                                <option value="Bến Tre">Bến Tre</option>
-                                <option value="Bình Định">Bình Định</option>
-                                <option value="Bình Dương">Bình Dương</option>
-                                <option value="Bình Phước">Bình Phước</option>
-                                <option value="Bình Thuận">Bình Thuận</option>
-                                <option value="Cà Mau">Cà Mau</option>
-                                <option value="Cao Bằng">Cao Bằng</option>
-                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                <option value="Đắk Nông">Đắk Nôngk</option>
-                                <option value="Điện Biên">Điện Biên</option>
-                                <option value="Đồng Nai">Đồng Nai</option>
-                                <option value="Đồng Tháp">Đồng Tháp</option>
-                                <option value="Gia Lai">Gia Lai</option>
-                                <option value="Hà Giang">Hà Giang</option>
-                                <option value="Hà Nam">Hà Nam</option>
-                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                <option value="Hải Dương">Hải Dương</option>
-                                <option value="Hậu Giang">Hậu Giang</option>
-                                <option value="Hòa Bình">Hòa Bình</option>
-                                <option value="Hưng Yên">Hưng Yên</option>
-                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                <option value="Kiên Giang">Kiên Giang</option>
-                                <option value="Kon Tum">Kon Tum</option>
-                                <option value="Lai Châu">Lai Châu</option>
-                                <option value="Lâm Đồng">Lâm Đồng</option>
-                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                <option value="Lào Cai">Lào Cai</option>
-                                <option value="Long An">Long An</option>
-                                <option value="Nam Định">Nam Định</option>
-                                <option value="Nghệ An">Nghệ An</option>
-                                <option value="Ninh Bình">Ninh Bình</option>
-                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                <option value="Phú Thọ">Phú Thọ</option>
-                                <option value="Quảng Bình">Quảng Bình</option>
-                                <option value="Quảng Nam">Quảng Nam</option>
-                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                <option value="Quảng Trị">Quảng Trị</option>
-                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                <option value="Sơn La">Sơn La</option>
-                                <option value="Tây Ninh">Tây Ninh</option>
-                                <option value="Thái Bình">Thái Bình</option>
-                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                                <option value="Tiền Giang">Tiền Giang</option>
-                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                <option value="Yên Bái">Yên Bái</option>
-                                <option value="Phú Yên">Phú Yên</option>
+                                <option value="0"><?php echo $user['placeofbirth']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -176,18 +119,8 @@ $user=selectforid()
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Năm tốt nghiệp</span>
                             <select name="graduationyear" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="2010">2010</option>
-                                <option value="2011">2011</option>
-                                <option value="2012">2012</option>
-                                <option value="2013">2013</option>
-                                <option value="2014">2014</option>
-                                <option value="2015">2015</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
+                                <option value="0"><?php echo $user['graduationyear']; ?></option>
+
                             </select>
                         </div>
                     </div>
@@ -197,12 +130,7 @@ $user=selectforid()
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Học lực lớp 12</span>
                             <select name="academicpower" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="yếu">Yếu</option>
-                                <option value="kém">Kém</option>
-                                <option value="trung bình">Trung bình</option>
-                                <option value="khá">Khá</option>
-                                <option value="giỏi">Giỏi</option>
+                                <option value="0"><?php echo $user['academicpower']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -210,11 +138,7 @@ $user=selectforid()
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Hạnh kiểm lớp 12</span>
                             <select name="conduct" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="yếu">Yếu</option>
-                                <option value="trung bình">Trung bình</option>
-                                <option value="khá">Khá</option>
-                                <option value="tốt">Tốt</option>
+                                <option value="0"><?php echo $user['conduct']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -223,82 +147,21 @@ $user=selectforid()
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Số CMND/CCCD</span>
-                            <input type="number" name="CMT" placeholder="Số CMT" class="form-control">
+                            <input type="number" name="CMT" placeholder="Số CMT" class="form-control" value="<?php echo $user['CMT']; ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Ngày cấp</span>
-                            <input type="date" name="dayranger" class="form-control">
+                            <input type="date" name="dayranger" class="form-control" value="<?php echo $user['dayranger']; ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Nơi cấp</span>
                             <select name="issuedby" class="form-control">
-                                <option value="0">-Chọn tỉnh-</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                <option value="Cần Thơ">Cần Thơ</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Hải Phòng">Hải Phòng</option>
-                                <option value="An Giang">An Giang</option>
-                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                                <option value="Bắc Giang">Bắc Giang</option>
-                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                <option value="Bạc Liêu">Bạc Liêu</option>
-                                <option value="Bắc Ninh">Bắc Ninh</option>
-                                <option value="Bến Tre">Bến Tre</option>
-                                <option value="Bình Định">Bình Định</option>
-                                <option value="Bình Dương">Bình Dương</option>
-                                <option value="Bình Phước">Bình Phước</option>
-                                <option value="Bình Thuận">Bình Thuận</option>
-                                <option value="Cà Mau">Cà Mau</option>
-                                <option value="Cao Bằng">Cao Bằng</option>
-                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                <option value="Đắk Nông">Đắk Nôngk</option>
-                                <option value="Điện Biên">Điện Biên</option>
-                                <option value="Đồng Nai">Đồng Nai</option>
-                                <option value="Đồng Tháp">Đồng Tháp</option>
-                                <option value="Gia Lai">Gia Lai</option>
-                                <option value="Hà Giang">Hà Giang</option>
-                                <option value="Hà Nam">Hà Nam</option>
-                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                <option value="Hải Dương">Hải Dương</option>
-                                <option value="Hậu Giang">Hậu Giang</option>
-                                <option value="Hòa Bình">Hòa Bình</option>
-                                <option value="Hưng Yên">Hưng Yên</option>
-                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                <option value="Kiên Giang">Kiên Giang</option>
-                                <option value="Kon Tum">Kon Tum</option>
-                                <option value="Lai Châu">Lai Châu</option>
-                                <option value="Lâm Đồng">Lâm Đồng</option>
-                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                <option value="Lào Cai">Lào Cai</option>
-                                <option value="Long An">Long An</option>
-                                <option value="Nam Định">Nam Định</option>
-                                <option value="Nghệ An">Nghệ An</option>
-                                <option value="Ninh Bình">Ninh Bình</option>
-                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                <option value="Phú Thọ">Phú Thọ</option>
-                                <option value="Quảng Bình">Quảng Bình</option>
-                                <option value="Quảng Nam">Quảng Nam</option>
-                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                <option value="Quảng Trị">Quảng Trị</option>
-                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                <option value="Sơn La">Sơn La</option>
-                                <option value="Tây Ninh">Tây Ninh</option>
-                                <option value="Thái Bình">Thái Bình</option>
-                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                                <option value="Tiền Giang">Tiền Giang</option>
-                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                <option value="Yên Bái">Yên Bái</option>
-                                <option value="Phú Yên">Phú Yên</option>
+                                <option value="0"><?php echo $user['issuedby']; ?></option>
+
                             </select>
                         </div>
                     </div>
@@ -307,7 +170,7 @@ $user=selectforid()
                     <div class="col-md-12">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Hộ khẩu thường trú</span>
-                            <textarea class="form-control" aria-label="With textarea" placeholder="Nhập hộ khẩu thường trú" name="household"></textarea>
+                            <textarea class="form-control" aria-label="With textarea" placeholder="Nhập hộ khẩu thường trú" name="household"><?php echo $user['household']; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -329,226 +192,43 @@ $user=selectforid()
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Năm lớp 10</span>
-                            <input type="text" name="MaTinh10" class="form-control">
+                            <input type="text" name="MaTinh10" class="form-control" value="<?php echo $user['MaTinh10']; ?>">
                         </div>
                     </div>
                     <div class="col-md-3"><select name="city10" class="form-control">
-                            <option value="0">-Chọn tỉnh-</option>
-                            <option value="Hà Nội">Hà Nội</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="Cần Thơ">Cần Thơ</option>
-                            <option value="Đà Nẵng">Đà Nẵng</option>
-                            <option value="Hải Phòng">Hải Phòng</option>
-                            <option value="An Giang">An Giang</option>
-                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                            <option value="Bắc Giang">Bắc Giang</option>
-                            <option value="Bắc Kạn">Bắc Kạn</option>
-                            <option value="Bạc Liêu">Bạc Liêu</option>
-                            <option value="Bắc Ninh">Bắc Ninh</option>
-                            <option value="Bến Tre">Bến Tre</option>
-                            <option value="Bình Định">Bình Định</option>
-                            <option value="Bình Dương">Bình Dương</option>
-                            <option value="Bình Phước">Bình Phước</option>
-                            <option value="Bình Thuận">Bình Thuận</option>
-                            <option value="Cà Mau">Cà Mau</option>
-                            <option value="Cao Bằng">Cao Bằng</option>
-                            <option value="Đắk Lắk">Đắk Lắk</option>
-                            <option value="Đắk Nông">Đắk Nôngk</option>
-                            <option value="Điện Biên">Điện Biên</option>
-                            <option value="Đồng Nai">Đồng Nai</option>
-                            <option value="Đồng Tháp">Đồng Tháp</option>
-                            <option value="Gia Lai">Gia Lai</option>
-                            <option value="Hà Giang">Hà Giang</option>
-                            <option value="Hà Nam">Hà Nam</option>
-                            <option value="Hà Tĩnh">Hà Tĩnh</option>
-                            <option value="Hải Dương">Hải Dương</option>
-                            <option value="Hậu Giang">Hậu Giang</option>
-                            <option value="Hòa Bình">Hòa Bình</option>
-                            <option value="Hưng Yên">Hưng Yên</option>
-                            <option value="Khánh Hòa">Khánh Hòa</option>
-                            <option value="Kiên Giang">Kiên Giang</option>
-                            <option value="Kon Tum">Kon Tum</option>
-                            <option value="Lai Châu">Lai Châu</option>
-                            <option value="Lâm Đồng">Lâm Đồng</option>
-                            <option value="Lạng Sơn">Lạng Sơn</option>
-                            <option value="Lào Cai">Lào Cai</option>
-                            <option value="Long An">Long An</option>
-                            <option value="Nam Định">Nam Định</option>
-                            <option value="Nghệ An">Nghệ An</option>
-                            <option value="Ninh Bình">Ninh Bình</option>
-                            <option value="Ninh Thuận">Ninh Thuận</option>
-                            <option value="Phú Thọ">Phú Thọ</option>
-                            <option value="Quảng Bình">Quảng Bình</option>
-                            <option value="Quảng Nam">Quảng Nam</option>
-                            <option value="Quảng Ngãi">Quảng Ngãi</option>
-                            <option value="Quảng Ninh">Quảng Ninh</option>
-                            <option value="Quảng Trị">Quảng Trị</option>
-                            <option value="Sóc Trăng">Sóc Trăng</option>
-                            <option value="Sơn La">Sơn La</option>
-                            <option value="Tây Ninh">Tây Ninh</option>
-                            <option value="Thái Bình">Thái Bình</option>
-                            <option value="Thái Nguyên">Thái Nguyên</option>
-                            <option value="Thanh Hóa">Thanh Hóa</option>
-                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                            <option value="Tiền Giang">Tiền Giang</option>
-                            <option value="Tuyên Quang">Tuyên Quang</option>
-                            <option value="Vĩnh Long">Vĩnh Long</option>
-                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                            <option value="Yên Bái">Yên Bái</option>
-                            <option value="Phú Yên">Phú Yên</option>
+                            <option value="0"><?php echo $user['city10']; ?></option>
+
                         </select></div>
-                    <div class="col-md-2"><input type="text" name="MaTruong10" class="form-control"></div>
-                    <div class="col-md-3"><input type="text" name="TenTruong10" class="form-control"></div>
+                    <div class="col-md-2"><input type="text" name="MaTruong10" class="form-control" value="<?php echo $user['MaTruong10']; ?>"></div>
+                    <div class="col-md-3"><input type="text" name="TenTruong10" class="form-control" value="<?php echo $user['TenTruong10']; ?>"></div>
                 </div>
                 <div class="input-group-prepend" style="margin-bottom: 10px;">
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Năm lớp 11</span>
-                            <input type="text" name="MaTinh11" class="form-control">
+                            <input type="text" name="MaTinh11" class="form-control" value="<?php echo $user['MaTinh11']; ?>">
                         </div>
                     </div>
                     <div class="col-md-3"><select name="city11" class="form-control">
-                            <option value="0">-Chọn tỉnh-</option>
-                            <option value="Hà Nội">Hà Nội</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="Cần Thơ">Cần Thơ</option>
-                            <option value="Đà Nẵng">Đà Nẵng</option>
-                            <option value="Hải Phòng">Hải Phòng</option>
-                            <option value="An Giang">An Giang</option>
-                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                            <option value="Bắc Giang">Bắc Giang</option>
-                            <option value="Bắc Kạn">Bắc Kạn</option>
-                            <option value="Bạc Liêu">Bạc Liêu</option>
-                            <option value="Bắc Ninh">Bắc Ninh</option>
-                            <option value="Bến Tre">Bến Tre</option>
-                            <option value="Bình Định">Bình Định</option>
-                            <option value="Bình Dương">Bình Dương</option>
-                            <option value="Bình Phước">Bình Phước</option>
-                            <option value="Bình Thuận">Bình Thuận</option>
-                            <option value="Cà Mau">Cà Mau</option>
-                            <option value="Cao Bằng">Cao Bằng</option>
-                            <option value="Đắk Lắk">Đắk Lắk</option>
-                            <option value="Đắk Nông">Đắk Nôngk</option>
-                            <option value="Điện Biên">Điện Biên</option>
-                            <option value="Đồng Nai">Đồng Nai</option>
-                            <option value="Đồng Tháp">Đồng Tháp</option>
-                            <option value="Gia Lai">Gia Lai</option>
-                            <option value="Hà Giang">Hà Giang</option>
-                            <option value="Hà Nam">Hà Nam</option>
-                            <option value="Hà Tĩnh">Hà Tĩnh</option>
-                            <option value="Hải Dương">Hải Dương</option>
-                            <option value="Hậu Giang">Hậu Giang</option>
-                            <option value="Hòa Bình">Hòa Bình</option>
-                            <option value="Hưng Yên">Hưng Yên</option>
-                            <option value="Khánh Hòa">Khánh Hòa</option>
-                            <option value="Kiên Giang">Kiên Giang</option>
-                            <option value="Kon Tum">Kon Tum</option>
-                            <option value="Lai Châu">Lai Châu</option>
-                            <option value="Lâm Đồng">Lâm Đồng</option>
-                            <option value="Lạng Sơn">Lạng Sơn</option>
-                            <option value="Lào Cai">Lào Cai</option>
-                            <option value="Long An">Long An</option>
-                            <option value="Nam Định">Nam Định</option>
-                            <option value="Nghệ An">Nghệ An</option>
-                            <option value="Ninh Bình">Ninh Bình</option>
-                            <option value="Ninh Thuận">Ninh Thuận</option>
-                            <option value="Phú Thọ">Phú Thọ</option>
-                            <option value="Quảng Bình">Quảng Bình</option>
-                            <option value="Quảng Nam">Quảng Nam</option>
-                            <option value="Quảng Ngãi">Quảng Ngãi</option>
-                            <option value="Quảng Ninh">Quảng Ninh</option>
-                            <option value="Quảng Trị">Quảng Trị</option>
-                            <option value="Sóc Trăng">Sóc Trăng</option>
-                            <option value="Sơn La">Sơn La</option>
-                            <option value="Tây Ninh">Tây Ninh</option>
-                            <option value="Thái Bình">Thái Bình</option>
-                            <option value="Thái Nguyên">Thái Nguyên</option>
-                            <option value="Thanh Hóa">Thanh Hóa</option>
-                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                            <option value="Tiền Giang">Tiền Giang</option>
-                            <option value="Tuyên Quang">Tuyên Quang</option>
-                            <option value="Vĩnh Long">Vĩnh Long</option>
-                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                            <option value="Yên Bái">Yên Bái</option>
-                            <option value="Phú Yên">Phú Yên</option>
+                            <option value="0"><?php echo $user['city11']; ?></option>
+
                         </select></div>
-                    <div class="col-md-2"><input type="text" name="MaTruong11" class="form-control"></div>
-                    <div class="col-md-3"><input type="text" name="TenTruong11" class="form-control"></div>
+                    <div class="col-md-2"><input type="text" name="MaTruong11" class="form-control" value="<?php echo $user['MaTruong11']; ?>"></div>
+                    <div class="col-md-3"><input type="text" name="TenTruong11" class="form-control" value="<?php echo $user['TenTruong11']; ?>"></div>
                 </div>
                 <div class="input-group-prepend" style="margin-bottom: 10px;">
                     <div class="col-md-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1" >Năm lớp 12</span>
-                            <input type="text" name="MaTinh12" class="form-control">
+                            <input type="text" name="MaTinh12" class="form-control" value="<?php echo $user['MaTinh12']; ?>">
                         </div>
                     </div>
                     <div class="col-md-3"><select name="city12" class="form-control">
-                            <option value="0">-Chọn tỉnh-</option>
-                            <option value="Hà Nội">Hà Nội</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="Cần Thơ">Cần Thơ</option>
-                            <option value="Đà Nẵng">Đà Nẵng</option>
-                            <option value="Hải Phòng">Hải Phòng</option>
-                            <option value="An Giang">An Giang</option>
-                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                            <option value="Bắc Giang">Bắc Giang</option>
-                            <option value="Bắc Kạn">Bắc Kạn</option>
-                            <option value="Bạc Liêu">Bạc Liêu</option>
-                            <option value="Bắc Ninh">Bắc Ninh</option>
-                            <option value="Bến Tre">Bến Tre</option>
-                            <option value="Bình Định">Bình Định</option>
-                            <option value="Bình Dương">Bình Dương</option>
-                            <option value="Bình Phước">Bình Phước</option>
-                            <option value="Bình Thuận">Bình Thuận</option>
-                            <option value="Cà Mau">Cà Mau</option>
-                            <option value="Cao Bằng">Cao Bằng</option>
-                            <option value="Đắk Lắk">Đắk Lắk</option>
-                            <option value="Đắk Nông">Đắk Nôngk</option>
-                            <option value="Điện Biên">Điện Biên</option>
-                            <option value="Đồng Nai">Đồng Nai</option>
-                            <option value="Đồng Tháp">Đồng Tháp</option>
-                            <option value="Gia Lai">Gia Lai</option>
-                            <option value="Hà Giang">Hà Giang</option>
-                            <option value="Hà Nam">Hà Nam</option>
-                            <option value="Hà Tĩnh">Hà Tĩnh</option>
-                            <option value="Hải Dương">Hải Dương</option>
-                            <option value="Hậu Giang">Hậu Giang</option>
-                            <option value="Hòa Bình">Hòa Bình</option>
-                            <option value="Hưng Yên">Hưng Yên</option>
-                            <option value="Khánh Hòa">Khánh Hòa</option>
-                            <option value="Kiên Giang">Kiên Giang</option>
-                            <option value="Kon Tum">Kon Tum</option>
-                            <option value="Lai Châu">Lai Châu</option>
-                            <option value="Lâm Đồng">Lâm Đồng</option>
-                            <option value="Lạng Sơn">Lạng Sơn</option>
-                            <option value="Lào Cai">Lào Cai</option>
-                            <option value="Long An">Long An</option>
-                            <option value="Nam Định">Nam Định</option>
-                            <option value="Nghệ An">Nghệ An</option>
-                            <option value="Ninh Bình">Ninh Bình</option>
-                            <option value="Ninh Thuận">Ninh Thuận</option>
-                            <option value="Phú Thọ">Phú Thọ</option>
-                            <option value="Quảng Bình">Quảng Bình</option>
-                            <option value="Quảng Nam">Quảng Nam</option>
-                            <option value="Quảng Ngãi">Quảng Ngãi</option>
-                            <option value="Quảng Ninh">Quảng Ninh</option>
-                            <option value="Quảng Trị">Quảng Trị</option>
-                            <option value="Sóc Trăng">Sóc Trăng</option>
-                            <option value="Sơn La">Sơn La</option>
-                            <option value="Tây Ninh">Tây Ninh</option>
-                            <option value="Thái Bình">Thái Bình</option>
-                            <option value="Thái Nguyên">Thái Nguyên</option>
-                            <option value="Thanh Hóa">Thanh Hóa</option>
-                            <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                            <option value="Tiền Giang">Tiền Giang</option>
-                            <option value="Tuyên Quang">Tuyên Quang</option>
-                            <option value="Vĩnh Long">Vĩnh Long</option>
-                            <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                            <option value="Yên Bái">Yên Bái</option>
-                            <option value="Phú Yên">Phú Yên</option>
+                            <option value="0"><?php echo $user['city12']; ?></option>
+
                         </select></div>
-                    <div class="col-md-2"><input type="text" name="MaTruong12" class="form-control"></div>
-                    <div class="col-md-3"><input type="text" name="TenTruong12" class="form-control"></div>
+                    <div class="col-md-2"><input type="text" name="MaTruong12" class="form-control" value="<?php echo $user['MaTruong12']; ?>"></div>
+                    <div class="col-md-3"><input type="text" name="TenTruong12" class="form-control" <?php echo $user['TenTruong12']; ?>></div>
                 </div>
                 <div class="input-group-prepend" style="margin-bottom: 10px;">
                     <div class="col-md-10">
@@ -559,9 +239,7 @@ $user=selectforid()
                     <div class="col-md-2">
                         <div class="input-group-prepend">
                             <select name="object" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="UT1">Nhóm ưu tiên 1</option>
-                                <option value="UT2">Nhóm ưu tiên 2</option>
+                                <option value="0"><?php echo $user['object']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -575,11 +253,7 @@ $user=selectforid()
                     <div class="col-md-2">
                         <div class="input-group-prepend">
                             <select name="area" class="form-control">
-                                <option value="0">-Chọn-</option>
-                                <option value="KV1">KV1</option>
-                                <option value="KV2-NT">KV2-NT</option>
-                                <option value="KV2">KV2</option>
-                                <option value="KV3">KV3</option>
+                                <option value="0"><?php echo $user['area']; ?></option>
                             </select>
                         </div>
                     </div>
@@ -588,7 +262,7 @@ $user=selectforid()
                     <div class="col-md-12">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Địa chỉ liên hệ</span>
-                            <input type="text" name="address" placeholder="Nhập địa chỉ" class="form-control">
+                            <input type="text" name="address" placeholder="Nhập địa chỉ" class="form-control" value="<?php echo $user['address']; ?>">
                         </div>
                     </div>
                 </div>
@@ -596,14 +270,23 @@ $user=selectforid()
                     <div class="col-md-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Điện thoại thí sinh</span>
-                            <input type="number" name="SDTThiSinh" placeholder="Nhập số điện thoại" class="form-control">
+                            <input type="number" name="SDTThiSinh" placeholder="Nhập số điện thoại" class="form-control" value="<?php echo $user['SDTThiSinh']; ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Điện thoại phụ huynh</span>
-                            <input type="number" name="SDTPhuHuynh" placeholder="Nhập số điện thoại" class="form-control">
+                            <input type="number" name="SDTPhuHuynh" placeholder="Nhập số điện thoại" class="form-control" value="<?php echo $user['SDTPhuHuynh']; ?>">
                         </div>
+                    </div>
+                </div>
+                <div class="input-group-prepend" style="margin-bottom: 10px;">
+                    <div class="col-md-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" >Ảnh hồ sơ</span>
+                            <img src="../../Xét%20tuyển/model/uploads/<?php echo $user['image'];?>" width="80%" height="300px;">
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -643,17 +326,13 @@ $user=selectforid()
                 <div class="input-group-prepend">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                        <input type="submit" value="GỬI HỒ SƠ" name="submit_profile" class="btn btn-success form-control">
+                        <button class="btn btn-success form-control"><a href="../index.php">Quay lại trang quản lý</a></button>
                     </div>
                     <div class="col-md-3"></div>
                 </div>
 
             </div>
         </form>
-
-        <?php
-        require_once "model/validate.php";
-        ?>
     </div>
 </div>
 </body>
