@@ -31,3 +31,17 @@ function selectforid($id)
     $users=mysqli_fetch_assoc($result);
     return $users;
 }
+function isdelete($id) {
+    $connect=connection();
+    $sql_delete="DELETE FROM `profile` WHERE CMT='$id'";
+    $result=mysqli_query($connect,$sql_delete);
+    if ($result)
+    {
+        $_SESSION['result']="Insert thành công";
+        header("Location: ../index.php");
+    }
+    else
+    {
+        echo "xóa thất bại";
+    }
+}

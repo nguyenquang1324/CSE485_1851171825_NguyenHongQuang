@@ -46,6 +46,7 @@ if(!isset($_SESSION['success']))
                         <th scope="col">Hồ sơ</th>
                         <th scope="col">Hình thức xét</th>
                         <th scope="col">Chi tiết </th>
+                        <th scope="col">Xóa </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,6 +64,7 @@ if(!isset($_SESSION['success']))
                             <td> <img src="../Xét%20tuyển/model/uploads/<?php echo $user['31']?>"></td>
                             <td> <?php echo $user['30'];?> </td>
                             <td> <a href="views/chitiet.php?id=<?php echo $user['0']?>"><i class="fas fa-edit"></i></a> </td>
+                            <td onclick="alert('Xác nhận yêu cầu xóa')"> <a href="views/delete.php?id=<?php echo $user['0']?>"><i class="fas fa-trash-alt"></i></a> </td>
                         </tr>
                     <?php }endforeach; ?>
                     </tbody>
